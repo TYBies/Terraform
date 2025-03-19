@@ -1,33 +1,23 @@
-output "vpc" {
-  value =  module.vpc.vpc_id
-  description = "VPC ID"
+output "vpc_id" {
+  description = "The ID of the VPC"
+  value       = module.vpc.vpc_id
 }
 
-output "public_subnets_ids" {
-  value = module.vpc.public_subnets
-  description = "List of public subnet IDs"
+output "private_subnets" {
+  description = "List of IDs of private subnets"
+  value       = module.vpc.private_subnets  
 }
 
-output "private_subnets_ids" {
-  value = module.vpc.private_subnets
-  description = "List of private subnet IDs"
-}
-output "region" {  
-  value = var.region
-  description = "Region for the resources"
-  
+output "public_subnets" {
+  description = "List of IDs of public subnets"
+  value        = module.vpc.public_subnets  
 }
 
-output "database_subnet_group" {
-  value = module.vpc.database_subnet_group
-  description = "Database subnet group name"
+#output "nat_public_ips" {
+ ## description = "List of public Elastic IPs created for AWS NAT Gateway"
+ # value       = aws_eip.nat[*].public_ip  
+#}
+output "region" {
+  description = "The region used"
+  value       = var.region  # This comes from variables, not the vpc module
 }
-
-output "azs" {
-  value = module.vpc.azs
-  description = "List of availability zones"
-}
-
-
-
-

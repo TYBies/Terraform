@@ -7,6 +7,10 @@ data "aws_ami" "amazon-linux-2" {
     values = ["amzn2-ami-hvm*"]
   }
 }
+resource "aws_key_pair" "terraform_exam_key" {
+  key_name   = "terraform_exam_keypair"
+  public_key = file("${path.root}/terraform_exam_keypair.pub")  # Make sure this file exists
+}
 
 # WordPress instance in public subnet
 resource "aws_instance" "ec2_public" {
@@ -14,9 +18,9 @@ resource "aws_instance" "ec2_public" {
   instance_type = var.instance_type
   count = var.environment == "dev" ? 2 : 3
   key_name = var.key_name
-  subnet_id = element(var.vpc.public_subnets, count.index)
+  subnet_id     = element(var.subnet_ids, count.index % length(var.subnet_ids))  # Changed from var.vpc.public_subnets
   vpc_security_group_ids = [var.sg_pub_id]
-  user_data = file("../install_wordpress.sh")
+  user_data = file("${path.module}/install_wordpress.sh")
   monitoring = var.monitoring
   associate_public_ip_address = true
 

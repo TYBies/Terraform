@@ -1,8 +1,8 @@
 # WordPress Public Security Group
 resource "aws_security_group" "wordpress_public" {
-  name        = "${var.namespace}-wordpress-public-sg"
+  name        = "${var.environment}-wordpress-public-sg"
   description = "Security group for public WordPress instances"
-  vpc_id      = module.networking.vpc_id
+  vpc_id      = var.vpc_id
 
   ingress {
     description = "HTTP from Internet"
@@ -25,7 +25,7 @@ resource "aws_security_group" "wordpress_public" {
   from_port   = 22
   to_port     = 22
   protocol    = "tcp"
-  cidr_blocks = ["0.0.0.0/0"] # ToDo:not safe. Replace with your actual IP
+  cidr_blocks = ["0.0.0.0/0"] # ToDo:not safe. Replace with your actual IP from Admin
 }
 
   egress {
@@ -34,13 +34,17 @@ resource "aws_security_group" "wordpress_public" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  tags = {
+    Name = "${var.environment}-wordpress-public-sg"
+    Description = "Security group for public WordPress instances"    
+  }
 
 }
 
 # RDS Security Group
 resource "aws_security_group" "rds" {
-  vpc_id = module.networking.vpc_id
-  name        = "${var.namespace}-rds-sg"
+  vpc_id = var.vpc_id
+  name        = "${var.environment}-rds-sg"
   description = "Security group for RDS instance" 
 
   ingress {
@@ -55,6 +59,11 @@ resource "aws_security_group" "rds" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "${var.environment}-rds-sg"
+    Description = "Security group for RDS instance"    
   }
  
 }

@@ -1,5 +1,6 @@
 resource "aws_db_instance" "wordpress_db" {
-  identifier             = "${var.namespace}-rds-${var.environment}"
+  
+  identifier             =  "terraform-exam-rds-${var.environment}-${count.index + 1}"
   engine                 = var.engine
   engine_version         = var.engine_version
   instance_class         = var.instance_class
@@ -16,6 +17,7 @@ resource "aws_db_instance" "wordpress_db" {
   publicly_accessible    = false
   multi_az               = var.environment == "prod" ? true : false  
   storage_encrypted      = true
+  deletion_protection    = false
 
   tags = {
     "Name"        = "${var.namespace}-wordpress-db"
@@ -27,4 +29,3 @@ resource "aws_db_subnet_group" "rds_subnet_group" {
   name       = "${var.namespace}-rds-subnet-group-${var.environment}"
   subnet_ids = var.subnet_ids
 }
-

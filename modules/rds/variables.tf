@@ -5,8 +5,8 @@
   }
   variable "engine_version" {
     description = "Version of the database engine"
-    type        = string
-    default     = "5.7.31"    
+    type        = string       
+    default     = "8.0.35"
   }
   variable "instance_class" {
     description = "Instance class of the database"
@@ -50,6 +50,10 @@
   variable "subnet_ids" {
     description = "Subnet IDs for the database"
     type        = list(string)
+  }
+  variable "vpc_security_group_ids" {
+    description = "Security group IDs for the database"
+    type        = list(string)    
   }
     
   

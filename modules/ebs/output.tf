@@ -1,24 +1,21 @@
-# Output for root EBS volume size
-# Output for root EBS volume size
-output "ec2_root_ebs_size" {
-  description = "The size (in GB) of the root EBS volume"
-  value       = var.root_block_device[0].volume_size  
+# modules/ebs/outputs.tf
+output "ebs_volume_ids" {
+  description = "List of created EBS volume IDs"
+  value       = aws_ebs_volume.terraform_exam_ebs[*].id
 }
 
-# Output for root EBS volume encryption status
-output "ec2_root_ebs_encrypted" {
-  description = "Whether the root EBS volume is encrypted"
-  value       = var.root_block_device[0].encrypted  
+output "ebs_attachment_ids" {
+  description = "List of EBS attachment IDs"
+  value       = aws_volume_attachment.terraform_exam_ebs_att[*].id
 }
 
-# Output for root EBS volume ID
-output "ec2_root_ebs_volume_id" {
-  description = "The ID of the root EBS volume"
-  value       = var.root_block_device[0].volume_id  
+output "ebs_volume_sizes" {
+  description = "List of EBS volume sizes"
+  value       = aws_ebs_volume.terraform_exam_ebs[*].size
 }
 
-# Output the instance ID
-output "ec2_instance_id" {
-  value = var.instance_id  
+# If you need to output information about the root device, get it from the EC2 instance
+output "ec2_instance_ids" {
+  description = "List of EC2 instance IDs"
+  value       = var.instance_ids
 }
-

@@ -15,9 +15,14 @@ variable "region" {
   default = "eu-west-3"
   description = "AWS region for resource deployment"
 }
-variable "vpc" {
+variable "vpc_id" {
   type = string
   default = ""
   description = "VPC ID for the deployment"
 }
   
+variable "vpc_cidr" {
+  type = string
+  default = ""
+  description = "VPC CIDR for the deployment"
+}

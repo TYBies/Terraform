@@ -15,24 +15,16 @@ variable "ebs_name" {
 
 variable "availability_zone" {
   description = "The availability zone for the EBS volume"
-  type        = string
-  default     = "eu-west-3a"
-}
-
-variable "instance_id" {
-  description = "The EC2 instance ID that the EBS volume will be attached to"
-  type        = string
-}
-
-
-variable "subnet_ids" {
-  description = "Subnet IDs"
   type        = list(string)  
 }
-variable "root_block_device" {
-  description = "The root block device information from the EC2 instance"
-  type        = list(object({
-    volume_size = number
-    encrypted   = bool
-  }))
+
+variable "instance_ids" {
+  description = "The EC2 instance ID that the EBS volume will be attached to"
+  type        = list(string)
 }
+
+variable "environment" {
+  description = "The environment for the resources"
+  type        = string  
+}
+

@@ -73,10 +73,7 @@ variable "sg_pub_id" {
   type        = string
 }
 
-#variable "sg_rds_id" {
-  #description = "RDS security group ID"
-  #type        = string  
-#}
+
 
 variable "environment" {
   type        = string
@@ -85,12 +82,12 @@ variable "environment" {
 }
 
 variable "availability_zone" {
-  type    = list(any)
+  type    = list(string)
   default = ["eu-west-3a"]
 }
 
 variable "subnet_ids" {
-  type    = list(any)
+  type    = list(string)
   default = []
 }
 variable "instance_type" {
@@ -104,4 +101,8 @@ variable "instance_name" {
 variable "instance_id" {
   type    = string
   default = ""  
+}
+variable "vpc_security_group_ids" {
+  type    = list(any)
+  default = []  
 }
