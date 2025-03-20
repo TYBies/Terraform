@@ -12,7 +12,12 @@ crash.log
 crash.*.log
 
 
-.terraform/
+*.pem
+*keypair*
+.terraform*
+.terraform.lock.hcl
+terraform_exam_key*
+terraform_exam_keypair
 
 
 
