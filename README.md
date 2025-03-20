@@ -40,9 +40,6 @@ terraform init
 terraform plan
 terraform apply
 
-Copy
-
-Configuration
 The following variables can be customized in variables.tf:
 
 AWS region
