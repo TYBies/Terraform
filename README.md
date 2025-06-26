@@ -36,6 +36,10 @@ terraform-exam/
     └── install_wordpress.sh
 ```
 
+## Module Reference
+
+For detailed information on the modules used in this project, including inputs, outputs, and usage examples, see the [Module Documentation](docs/MODULES.md).
+
 ## Quick Start
 
 1. Clone the repository
